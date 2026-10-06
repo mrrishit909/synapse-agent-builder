@@ -1,0 +1,64 @@
+# Local stack: `docker compose up --build -d --wait` (or `make dev`). Ports: web 8441, API 8440, Postgres 55440, mail sink UI 8442.
+name: synapse-agent-builder
+services:
+  db:
+    image: postgres:16-alpine
+    environment: { POSTGRES_DB: synapse, POSTGRES_USER: synapse, POSTGRES_PASSWORD: owner-dev-only }
+    ports: ["127.0.0.1:55440:5432"]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U synapse -d synapse"], interval: 2s, retries: 30 }
+    volumes: [dbdata:/var/lib/postgresql/data]
+
+  generator:   # synthetic data generator: e-mails, trace fixtures, price list, evaluation baseline (data/fixtures)
+    build: { context: ., dockerfile: infra/docker/node.Dockerfile }
+    command: ["node", "data/simulators/generate.ts"]
+    volumes: [fixtures:/app/data/fixtures]
+
+  api:
+    build: { context: ., dockerfile: infra/docker/node.Dockerfile }
+    command: ["node", "apps/api/src/main.ts"]
+    environment:
+      MIGRATE_ON_START: "1"
+      OWNER_DATABASE_URL: postgresql://synapse:owner-dev-only@db:5432/synapse
+      DATABASE_URL: postgresql://synapse_app:app-dev-only@db:5432/synapse
+      SECRET_KEY: local-dev-secret-key-not-for-production
+      PUBLIC_API_URL: http://localhost:8440
+      CORS_ORIGINS: http://localhost:8441,http://127.0.0.1:8441
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel:4318
+    ports: ["127.0.0.1:8440:8440"]
+    depends_on:
+      db: { condition: service_healthy }
+      generator: { condition: service_completed_successfully }
+      otel: { condition: service_started }
+    healthcheck: { test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8440/healthz"], interval: 3s, retries: 40, start_period: 10s }
+
+  web:         # the same static site as the public sandbox, built to run workflows on the API
+    build: { context: ., dockerfile: infra/docker/web.Dockerfile, args: { NEXT_PUBLIC_API_URL: "http://localhost:8440" } }
+    ports: ["127.0.0.1:8441:80"]
+    depends_on: { api: { condition: service_healthy } }
+
+  mail:        # local notification sink (no alert e-mails in this slice yet; kept so the stack matches the blueprint)
+    image: axllent/mailpit:v1.21
+    ports: ["127.0.0.1:8442:8025"]
+
+  otel:        # OpenTelemetry collector: API traces over OTLP/HTTP, printed by the debug exporter
+    image: otel/opentelemetry-collector:0.111.0
+    command: ["--config=/etc/otel.yaml"]
+    volumes: [./infra/otel/collector.yaml:/etc/otel.yaml:ro]
+
+  test:        # `docker compose --profile test run --rm test`: unit + API contract tests against a throwaway database
+    profiles: [test]
+    build: { context: ., dockerfile: infra/docker/node.Dockerfile }
+    command: ["npx", "vitest", "run"]
+    environment:
+      OWNER_DATABASE_URL: postgresql://synapse:owner-dev-only@testdb:5432/synapse
+      DATABASE_URL: postgresql://synapse_app:app-dev-only@testdb:5432/synapse
+    depends_on: { testdb: { condition: service_healthy } }
+
+  testdb:
+    profiles: [test]
+    image: postgres:16-alpine
+    environment: { POSTGRES_DB: synapse, POSTGRES_USER: synapse, POSTGRES_PASSWORD: owner-dev-only }
+    tmpfs: [/var/lib/postgresql/data]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U synapse -d synapse"], interval: 2s, retries: 30 }
+
+volumes: { dbdata: {}, fixtures: {} }

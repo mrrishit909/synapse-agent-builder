@@ -1,0 +1,25 @@
+// case-study screenshots (real GPU): node scripts/shots.mjs <base-url> <out-dir> <slug>
+import { chromium } from "@playwright/test";
+const [base, out, slug] = process.argv.slice(2);
+const b = await chromium.launch({ channel: "chrome", args: ["--use-angle=metal", "--enable-gpu", "--ignore-gpu-blocklist"] });
+const p = await b.newPage({ viewport: { width: 1400, height: 860 } });
+const ready = async (q = "") => { await p.goto(base + q); await p.waitForFunction(() => window.__synapse?.state().run, null, { timeout: 30000 }); await p.waitForTimeout(800); };
+await ready();
+await p.getByLabel("Introduction").evaluate((el) => el.querySelectorAll("[data-chapter]")[1].scrollIntoView());
+await p.waitForTimeout(2300);
+await p.screenshot({ path: `${out}/${slug}.shot-intro.png` });
+await ready("?tpl=1");
+await p.evaluate(() => { window.__synapse.playback.t = 0; });
+await p.getByRole("button", { name: "Play trace" }).click();
+await p.waitForTimeout(3350);
+await p.screenshot({ path: `${out}/${slug}.shot-run.png` });
+await ready("?tpl=1&node=crm");
+await p.waitForTimeout(600);
+await p.screenshot({ path: `${out}/${slug}.shot-tool.png` });
+await ready("?tpl=1&swap=nova-pro&v=2&view=compare");
+await p.waitForTimeout(800);
+await p.screenshot({ path: `${out}/${slug}.shot-compare.png` });
+await p.getByRole("complementary", { name: "Comparison" }).evaluate((el) => el.scrollTo({ top: 520 }));
+await p.waitForTimeout(300);
+await p.screenshot({ path: `${out}/${slug}.shot-matrix.png` });
+await b.close();

@@ -1,0 +1,2776 @@
+{
+ "openapi": "3.1.0",
+ "info": {
+  "title": "SYNAPSE API",
+  "version": "1.0.0",
+  "description": "Visual agent workflow builder on simulated providers. Mutations need an Idempotency-Key header. Errors are {error:{code,message,traceId}}. Lists are paginated with ?limit and ?cursor (nextCursor)."
+ },
+ "components": {
+  "securitySchemes": {
+   "bearer": {
+    "type": "http",
+    "scheme": "bearer"
+   }
+  },
+  "schemas": {}
+ },
+ "paths": {
+  "/v1/models/catalog": {
+   "get": {
+    "summary": "Simulated providers: price list, latency and quality profile",
+    "tags": [
+     "models"
+    ],
+    "responses": {
+     "200": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "items": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "additionalProperties": true
+           }
+          },
+          "note": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/workflows": {
+   "post": {
+    "tags": [
+     "workflows"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "required": [
+         "id",
+         "name",
+         "nodes",
+         "edges"
+        ],
+        "properties": {
+         "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]{1,60}$"
+         },
+         "name": {
+          "type": "string",
+          "maxLength": 120
+         },
+         "version": {
+          "type": "integer"
+         },
+         "nodes": {
+          "type": "array",
+          "maxItems": 2100,
+          "items": {
+           "type": "object",
+           "required": [
+            "id",
+            "type",
+            "label",
+            "x",
+            "y",
+            "config"
+           ],
+           "properties": {
+            "id": {
+             "type": "string",
+             "pattern": "^[a-z0-9-]{1,40}$"
+            },
+            "type": {
+             "type": "string"
+            },
+            "label": {
+             "type": "string",
+             "maxLength": 80
+            },
+            "x": {
+             "type": "number"
+            },
+            "y": {
+             "type": "number"
+            },
+            "config": {
+             "type": "object",
+             "additionalProperties": true
+            },
+            "group": {
+             "type": "string"
+            }
+           }
+          }
+         },
+         "edges": {
+          "type": "array",
+          "maxItems": 5200,
+          "items": {
+           "type": "object",
+           "required": [
+            "id",
+            "from",
+            "to"
+           ],
+           "properties": {
+            "id": {
+             "type": "string"
+            },
+            "from": {
+             "type": "string"
+            },
+            "to": {
+             "type": "string"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "parameters": [
+     {
+      "schema": {
+       "type": "string",
+       "minLength": 8,
+       "maxLength": 128
+      },
+      "in": "header",
+      "name": "idempotency-key",
+      "required": true
+     }
+    ],
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "string"
+          },
+          "uuid": {
+           "type": "string"
+          },
+          "version": {
+           "type": "integer"
+          },
+          "compiled": {
+           "type": "boolean"
+          },
+          "issues": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "additionalProperties": true
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/workflows/{id}": {
+   "put": {
+    "summary": "Save a new version",
+    "tags": [
+     "workflows"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "required": [
+         "id",
+         "name",
+         "nodes",
+         "edges"
+        ],
+        "properties": {
+         "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]{1,60}$"
+         },
+         "name": {
+          "type": "string",
+          "maxLength": 120
+         },
+         "version": {
+          "type": "integer"
+         },
+         "nodes": {
+          "type": "array",
+          "maxItems": 2100,
+          "items": {
+           "type": "object",
+           "required": [
+            "id",
+            "type",
+            "label",
+            "x",
+            "y",
+            "config"
+           ],
+           "properties": {
+            "id": {
+             "type": "string",
+             "pattern": "^[a-z0-9-]{1,40}$"
+            },
+            "type": {
+             "type": "string"
+            },
+            "label": {
+             "type": "string",
+             "maxLength": 80
+            },
+            "x": {
+             "type": "number"
+            },
+            "y": {
+             "type": "number"
+            },
+            "config": {
+             "type": "object",
+             "additionalProperties": true
+            },
+            "group": {
+             "type": "string"
+            }
+           }
+          }
+         },
+         "edges": {
+          "type": "array",
+          "maxItems": 5200,
+          "items": {
+           "type": "object",
+           "required": [
+            "id",
+            "from",
+            "to"
+           ],
+           "properties": {
+            "id": {
+             "type": "string"
+            },
+            "from": {
+             "type": "string"
+            },
+            "to": {
+             "type": "string"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "parameters": [
+     {
+      "schema": {
+       "type": "string"
+      },
+      "in": "path",
+      "name": "id",
+      "required": true
+     },
+     {
+      "schema": {
+       "type": "string",
+       "minLength": 8,
+       "maxLength": 128
+      },
+      "in": "header",
+      "name": "idempotency-key",
+      "required": true
+     }
+    ],
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "string"
+          },
+          "uuid": {
+           "type": "string"
+          },
+          "version": {
+           "type": "integer"
+          },
+          "compiled": {
+           "type": "boolean"
+          },
+          "issues": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "additionalProperties": true
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "tags": [
+     "workflows"
+    ],
+    "parameters": [
+     {
+      "schema": {
+       "type": "integer"
+      },
+      "in": "query",
+      "name": "version",
+      "required": false
+     },
+     {
+      "schema": {
+       "type": "string"
+      },
+      "in": "path",
+      "name": "id",
+      "required": true
+     }
+    ],
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "version": {
+           "type": "integer"
+          },
+          "workflow": {
+           "type": "object",
+           "additionalProperties": true
+          }
+         },
+         "additionalProperties": true
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/workflows/{id}/compile": {
+   "post": {
+    "tags": [
+     "workflows"
+    ],
+    "parameters": [
+     {
+      "schema": {
+       "type": "string"
+      },
+      "in": "path",
+      "name": "id",
+      "required": true
+     }
+    ],
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "ok": {
+           "type": "boolean"
+          },
+          "plan": {
+           "anyOf": [
+            {
+             "type": "object",
+             "additionalProperties": true
+            },
+            {
+             "type": "null"
+            }
+           ]
+          },
+          "issues": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "additionalProperties": true
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/workflows/{id}/runs": {
+   "post": {
+    "tags": [
+     "runs"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "properties": {
+         "version": {
+          "type": "integer"
+         },
+         "emailId": {
+          "type": "string",
+          "pattern": "^(sample|em-\\d{3})$"
+         },
+         "email": {
+          "type": "object",
+          "required": [
+           "subject",
+           "body"
+          ],
+          "properties": {
+           "subject": {
+            "type": "string",
+            "maxLength": 300
+           },
+           "body": {
+            "type": "string",
+            "maxLength": 20000
+           }
+          }
+         },
+         "faults": {
+          "type": "object",
+          "properties": {
+           "forced": {
+            "type": "object",
+            "additionalProperties": {
+             "anyOf": [
+              {
+               "type": "integer"
+              },
+              {
+               "type": "string",
+               "enum": [
+                "timeout",
+                "malformed"
+               ]
+              }
+             ]
+            }
+           },
+           "providerDown": {
+            "type": "array",
+            "items": {
+             "type": "string"
+            },
+            "maxItems": 4
+           }
+          }
+         },
+         "modelOverride": {
+          "type": "string"
+         }
+        }
+       }
+      }
+     }
+    },
+    "parameters": [
+     {
+      "schema": {
+       "type": "string"
+      },
+      "in": "path",
+      "name": "id",
+      "required": true
+     },
+     {
+      "schema": {
+       "type": "string",
+       "minLength": 8,
+       "maxLength": 128
+      },
+      "in": "header",
+      "name": "idempotency-key",
+      "required": true
+     }
+    ],
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "run": {
+           "type": "object",
+           "additionalProperties": true,
+           "required": [
+            "id",
+            "status",
+            "steps",
+            "totalCostUsd",
+            "totalLatencyMs"
+           ],
+           "properties": {
+            "id": {
+             "type": "string"
+            },
+            "status": {
+             "type": "string",
+             "enum": [
+              "succeeded",
+              "failed"
+             ]
+            },
+            "steps": {
+             "type": "array",
+             "items": {
+              "type": "object",
+              "additionalProperties": true
+             }
+            },
+            "totalCostUsd": {
+             "type": "number"
+            },
+            "totalLatencyMs": {
+             "type": "number"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/runs/{id}": {
+   "get": {
+    "tags": [
+     "runs"
+    ],
+    "parameters": [
+     {
+      "schema": {
+       "type": "string"
+      },
+      "in": "path",
+      "name": "id",
+      "required": true
+     }
+    ],
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "required": [
+          "id",
+          "status",
+          "steps",
+          "totalCostUsd",
+          "totalLatencyMs"
+         ],
+         "properties": {
+          "id": {
+           "type": "string"
+          },
+          "status": {
+           "type": "string",
+           "enum": [
+            "succeeded",
+            "failed"
+           ]
+          },
+          "steps": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "additionalProperties": true
+           }
+          },
+          "totalCostUsd": {
+           "type": "number"
+          },
+          "totalLatencyMs": {
+           "type": "number"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/runs/{id}/steps": {
+   "get": {
+    "tags": [
+     "runs"
+    ],
+    "parameters": [
+     {
+      "schema": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 200,
+       "default": 50
+      },
+      "in": "query",
+      "name": "limit",
+      "required": false
+     },
+     {
+      "schema": {
+       "type": "string"
+      },
+      "in": "query",
+      "name": "cursor",
+      "required": false
+     },
+     {
+      "schema": {
+       "type": "string"
+      },
+      "in": "path",
+      "name": "id",
+      "required": true
+     }
+    ],
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "items": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "additionalProperties": true
+           }
+          },
+          "nextCursor": {
+           "type": [
+            "null",
+            "string"
+           ]
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/runs/{id}/replay": {
+   "post": {
+    "tags": [
+     "runs"
+    ],
+    "parameters": [
+     {
+      "schema": {
+       "type": "string"
+      },
+      "in": "path",
+      "name": "id",
+      "required": true
+     },
+     {
+      "schema": {
+       "type": "string",
+       "minLength": 8,
+       "maxLength": 128
+      },
+      "in": "header",
+      "name": "idempotency-key",
+      "required": true
+     }
+    ],
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "run": {
+           "type": "object",
+           "additionalProperties": true,
+           "required": [
+            "id",
+            "status",
+            "steps",
+            "totalCostUsd",
+            "totalLatencyMs"
+           ],
+           "properties": {
+            "id": {
+             "type": "string"
+            },
+            "status": {
+             "type": "string",
+             "enum": [
+              "succeeded",
+              "failed"
+             ]
+            },
+            "steps": {
+             "type": "array",
+             "items": {
+              "type": "object",
+              "additionalProperties": true
+             }
+            },
+            "totalCostUsd": {
+             "type": "number"
+            },
+            "totalLatencyMs": {
+             "type": "number"
+            }
+           }
+          },
+          "identical": {
+           "type": "boolean"
+          },
+          "differences": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/evaluations": {
+   "post": {
+    "tags": [
+     "evaluations"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "required": [
+         "workflowId",
+         "versions"
+        ],
+        "properties": {
+         "workflowId": {
+          "type": "string"
+         },
+         "versions": {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          },
+          "minItems": 2,
+          "maxItems": 2
+         }
+        }
+       }
+      }
+     }
+    },
+    "parameters": [
+     {
+      "schema": {
+       "type": "string",
+       "minLength": 8,
+       "maxLength": 128
+      },
+      "in": "header",
+      "name": "idempotency-key",
+      "required": true
+     }
+    ],
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "summaries": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "additionalProperties": true
+           }
+          },
+          "gate": {
+           "type": "object",
+           "additionalProperties": true
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/tools/test": {
+   "post": {
+    "tags": [
+     "tools"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "required": [
+         "tool",
+         "orderId"
+        ],
+        "properties": {
+         "tool": {
+          "type": "string",
+          "enum": [
+           "crm"
+          ]
+         },
+         "orderId": {
+          "type": "string",
+          "pattern": "^ORD-\\d{5}$"
+         }
+        }
+       }
+      }
+     }
+    },
+    "parameters": [
+     {
+      "schema": {
+       "type": "string",
+       "minLength": 8,
+       "maxLength": 128
+      },
+      "in": "header",
+      "name": "idempotency-key",
+      "required": true
+     }
+    ],
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "status": {
+           "type": "integer"
+          },
+          "latencyMs": {
+           "type": "integer"
+          },
+          "result": {
+           "type": "object",
+           "additionalProperties": true
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/workflows/{id}/publish": {
+   "post": {
+    "tags": [
+     "endpoints"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "properties": {
+         "version": {
+          "type": "integer"
+         }
+        }
+       }
+      }
+     }
+    },
+    "parameters": [
+     {
+      "schema": {
+       "type": "string"
+      },
+      "in": "path",
+      "name": "id",
+      "required": true
+     },
+     {
+      "schema": {
+       "type": "string",
+       "minLength": 8,
+       "maxLength": 128
+      },
+      "in": "header",
+      "name": "idempotency-key",
+      "required": true
+     }
+    ],
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "slug": {
+           "type": "string"
+          },
+          "url": {
+           "type": "string"
+          },
+          "key": {
+           "type": "string"
+          },
+          "version": {
+           "type": "integer"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/endpoints/{slug}/invoke": {
+   "post": {
+    "summary": "Run a published workflow (auth: the endpoint key)",
+    "tags": [
+     "endpoints"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "required": [
+         "subject",
+         "body"
+        ],
+        "properties": {
+         "subject": {
+          "type": "string",
+          "maxLength": 300
+         },
+         "body": {
+          "type": "string",
+          "maxLength": 20000
+         }
+        }
+       }
+      }
+     }
+    },
+    "parameters": [
+     {
+      "schema": {
+       "type": "string"
+      },
+      "in": "path",
+      "name": "slug",
+      "required": true
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "runId": {
+           "type": "string"
+          },
+          "category": {
+           "type": "string"
+          },
+          "reply": {
+           "type": "string"
+          },
+          "latencyMs": {
+           "type": "number"
+          },
+          "costUsd": {
+           "type": "number"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/audit": {
+   "get": {
+    "tags": [
+     "admin"
+    ],
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "items": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "additionalProperties": true
+           }
+          },
+          "chainValid": {
+           "type": "boolean"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Default Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "required": [
+          "error"
+         ],
+         "properties": {
+          "error": {
+           "type": "object",
+           "required": [
+            "code",
+            "message"
+           ],
+           "properties": {
+            "code": {
+             "type": "string"
+            },
+            "message": {
+             "type": "string"
+            },
+            "traceId": {
+             "type": "string"
+            },
+            "details": {}
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "servers": [
+  {
+   "url": "http://localhost:8440"
+  }
+ ]
+}

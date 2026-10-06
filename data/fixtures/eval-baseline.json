@@ -1,0 +1,113 @@
+{
+ "v1": {
+  "version": "v1",
+  "n": 64,
+  "passRate": 0.890625,
+  "accuracy": 0.90625,
+  "factsRecall": 0.9888888888888889,
+  "meanSimilarity": 0.8142500000000009,
+  "judgeMean": 4.71875,
+  "byCategory": {
+   "billing": {
+    "n": 14,
+    "accuracy": 0.7857142857142857
+   },
+   "shipping": {
+    "n": 9,
+    "accuracy": 1
+   },
+   "technical": {
+    "n": 10,
+    "accuracy": 1
+   },
+   "account": {
+    "n": 8,
+    "accuracy": 1
+   },
+   "cancellation": {
+    "n": 15,
+    "accuracy": 0.8
+   },
+   "other": {
+    "n": 8,
+    "accuracy": 1
+   }
+  },
+  "latencyP50": 3274,
+  "latencyP95": 3935,
+  "costPerRun": 0.00164519625,
+  "retries": 2,
+  "repairs": 0,
+  "fallbacks": 0,
+  "cacheHits": 0,
+  "failedRuns": 0
+ },
+ "v2": {
+  "version": "v2",
+  "n": 64,
+  "passRate": 0.828125,
+  "accuracy": 0.921875,
+  "factsRecall": 0.9333333333333333,
+  "meanSimilarity": 0.8015000000000009,
+  "judgeMean": 4.53125,
+  "byCategory": {
+   "billing": {
+    "n": 14,
+    "accuracy": 0.9285714285714286
+   },
+   "shipping": {
+    "n": 9,
+    "accuracy": 1
+   },
+   "technical": {
+    "n": 10,
+    "accuracy": 0.9
+   },
+   "account": {
+    "n": 8,
+    "accuracy": 0.875
+   },
+   "cancellation": {
+    "n": 15,
+    "accuracy": 0.8666666666666667
+   },
+   "other": {
+    "n": 8,
+    "accuracy": 1
+   }
+  },
+  "latencyP50": 2107,
+  "latencyP95": 2840,
+  "costPerRun": 0.0004824934375000001,
+  "retries": 1,
+  "repairs": 4,
+  "fallbacks": 0,
+  "cacheHits": 0,
+  "failedRuns": 0
+ },
+ "gate": {
+  "pass": false,
+  "rules": [
+   {
+    "name": "pass rate within 2 points",
+    "ok": false,
+    "detail": "89.1% -> 82.8%"
+   },
+   {
+    "name": "no category drops more than 5 points",
+    "ok": false,
+    "detail": "largest drop: account 12.5 points"
+   },
+   {
+    "name": "p95 latency no more than 25% slower",
+    "ok": true,
+    "detail": "3935 -> 2840 ms"
+   },
+   {
+    "name": "no reply contains personal data",
+    "ok": true,
+    "detail": "0 with PII"
+   }
+  ]
+ }
+}

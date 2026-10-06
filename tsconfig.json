@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "target": "ES2023", "module": "nodenext", "moduleResolution": "nodenext", "strict": true, "noEmit": true,
+    "allowImportingTsExtensions": true, "verbatimModuleSyntax": false, "skipLibCheck": true, "lib": ["ES2023", "DOM"], "types": ["node"]
+  },
+  "include": ["packages/*/src/**/*.ts", "packages/*/test/**/*.ts", "apps/api/src/**/*.ts", "apps/api/test/**/*.ts", "data/simulators/*.ts", "scripts/*.ts", "tests/**/*.ts", "*.config.ts"]
+}

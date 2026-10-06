@@ -1,0 +1,49 @@
+{
+ "datasets": [
+  {
+   "file": "emails.json",
+   "provider": "synthetic: packages/domain (this repository)",
+   "license": "MIT",
+   "seed": 11,
+   "transformationVersion": "synapse-fixtures-v1",
+   "sha256": "e19ae33a72adb50236fcb08b3cfad7f6389ff227598401e2747f75834bf30e64"
+  },
+  {
+   "file": "traces.json",
+   "provider": "synthetic: packages/domain (this repository)",
+   "license": "MIT",
+   "seed": 11,
+   "transformationVersion": "synapse-fixtures-v1",
+   "sha256": "dc6fc79218c93ca2720dcb133b0a75bac9ea4534117f682777a2ea6d22115f69"
+  },
+  {
+   "file": "models.json",
+   "provider": "synthetic: packages/domain (this repository)",
+   "license": "MIT",
+   "seed": 11,
+   "transformationVersion": "synapse-fixtures-v1",
+   "sha256": "97fc157382470b6e98133fe966c784ce739d7a4d2b49082f85f26f8b9ea35672"
+  },
+  {
+   "file": "eval-baseline.json",
+   "provider": "synthetic: packages/domain (this repository)",
+   "license": "MIT",
+   "seed": 11,
+   "transformationVersion": "synapse-fixtures-v1",
+   "sha256": "af0b684676e2c3e60aefef4dc617fa6a2f920ee0a4714ec81f5bb395deab9eba"
+  }
+ ],
+ "qualityChecks": {
+  "emails": 64,
+  "labelsPresent": true,
+  "nearDuplicates": 4,
+  "traceStatuses": {
+   "success": "succeeded",
+   "toolTimeout": "succeeded",
+   "malformedOutput": "succeeded",
+   "modelFallback": "succeeded",
+   "providerOutage": "failed"
+  },
+  "secretsAbsent": true
+ }
+}

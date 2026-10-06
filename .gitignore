@@ -1,0 +1,10 @@
+node_modules/
+apps/web/.next/
+apps/web/out/
+apps/web/public/data/
+apps/web/next-env.d.ts
+apps/web/tsconfig.tsbuildinfo
+test-results/
+playwright-report/
+coverage/
+.DS_Store

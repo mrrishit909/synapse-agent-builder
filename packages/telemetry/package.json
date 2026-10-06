@@ -1,0 +1,1 @@
+{"name":"@synapse/telemetry","private":true,"type":"module","exports":{".":"./src/index.ts"},"dependencies":{"web-vitals":"^6.2.3"}}

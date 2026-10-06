@@ -1,0 +1,61 @@
+{
+ "note": "simulated providers and an invented price list",
+ "models": [
+  {
+   "id": "atlas-large",
+   "provider": "Atlas AI",
+   "label": "Atlas Large",
+   "inPerM": 3,
+   "outPerM": 15,
+   "latencyMs": 900,
+   "perOutTokMs": 9,
+   "contextTokens": 200000,
+   "quality": 0.96,
+   "malformedRate": 0.005,
+   "rate429": 0.01,
+   "rate500": 0.003
+  },
+  {
+   "id": "atlas-mini",
+   "provider": "Atlas AI",
+   "label": "Atlas Mini",
+   "inPerM": 0.25,
+   "outPerM": 1.25,
+   "latencyMs": 320,
+   "perOutTokMs": 3,
+   "contextTokens": 128000,
+   "quality": 0.88,
+   "malformedRate": 0.01,
+   "rate429": 0.01,
+   "rate500": 0.003
+  },
+  {
+   "id": "nova-pro",
+   "provider": "Nova Labs",
+   "label": "Nova Pro",
+   "inPerM": 1,
+   "outPerM": 4,
+   "latencyMs": 520,
+   "perOutTokMs": 4.5,
+   "contextTokens": 64000,
+   "quality": 0.93,
+   "malformedRate": 0.06,
+   "rate429": 0.02,
+   "rate500": 0.005
+  },
+  {
+   "id": "nova-lite",
+   "provider": "Nova Labs",
+   "label": "Nova Lite",
+   "inPerM": 0.1,
+   "outPerM": 0.4,
+   "latencyMs": 210,
+   "perOutTokMs": 2,
+   "contextTokens": 32000,
+   "quality": 0.81,
+   "malformedRate": 0.03,
+   "rate429": 0.02,
+   "rate500": 0.005
+  }
+ ]
+}

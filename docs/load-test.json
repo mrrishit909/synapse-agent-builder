@@ -1,0 +1,32 @@
+{
+ "when": "2026-10-06, MacBook Pro (Apple silicon), API as one Node 24 process on the host, Postgres 16 in Docker, client on the same machine",
+ "command": "RATE_LIMIT=1000000 node apps/api/src/main.ts & node tests/performance/load.ts http://127.0.0.1:8440 32 10 1000",
+ "note": "a quarter of requests are full workflow runs (simulated providers, 6 steps persisted, audit row); the rest read a stored run",
+ "result": {
+  "base": "http://127.0.0.1:8440",
+  "clients": 32,
+  "seconds": 10,
+  "rps": 1137,
+  "runs": {
+   "n": 2848,
+   "p50": 59.9,
+   "p95": 80.4,
+   "p99": 89.8
+  },
+  "reads": {
+   "n": 8521,
+   "p50": 16.2,
+   "p95": 24.2,
+   "p99": 28.9
+  },
+  "errors": 0,
+  "streams": {
+   "requested": 1000,
+   "open": 1000,
+   "failed": 0,
+   "completed": 1000,
+   "ms": 1070
+  }
+ },
+ "caveat": "same-machine client and server; simulated providers answer instantly, so this measures the platform, not model latency"
+}

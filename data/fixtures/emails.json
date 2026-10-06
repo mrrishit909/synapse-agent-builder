@@ -1,0 +1,676 @@
+{
+ "seed": 11,
+ "count": 64,
+ "emails": [
+  {
+   "id": "em-001",
+   "subject": "My invoice for {order} shows I",
+   "body": "Hello,\n\nMy invoice for ORD-57695 shows I was overcharged on the payment. \n\nThanks,\nQuinn",
+   "label": "billing",
+   "orderId": "ORD-57695",
+   "facts": [
+    "order ORD-57695",
+    "the billing request"
+   ]
+  },
+  {
+   "id": "em-002",
+   "subject": "The delivery for {order} is late",
+   "body": "Hello,\n\nThe delivery for ORD-17202 is late and the package never arrived. \n\nThanks,\nCasey",
+   "label": "shipping",
+   "orderId": "ORD-17202",
+   "facts": [
+    "order ORD-17202",
+    "the shipping request"
+   ]
+  },
+  {
+   "id": "em-003",
+   "subject": "The app keeps showing an error",
+   "body": "Hello,\n\nThe app keeps showing an error and will crash when I open it. \n\nThanks,\nTaylor",
+   "label": "technical",
+   "orderId": null,
+   "facts": [
+    "the technical request"
+   ]
+  },
+  {
+   "id": "em-004",
+   "subject": "I need to reset my password,",
+   "body": "Hello,\n\nI need to reset my password, the link doesn't work. You can call me on +1 (555) 0134-4563. \n\nThanks,\nJordan",
+   "label": "account",
+   "orderId": null,
+   "facts": [
+    "the account request"
+   ]
+  },
+  {
+   "id": "em-005",
+   "subject": "I want to close my account",
+   "body": "Hello,\n\nI want to close my account and stop my subscription. \n\nThanks,\nJordan",
+   "label": "cancellation",
+   "orderId": null,
+   "facts": [
+    "the cancellation request"
+   ]
+  },
+  {
+   "id": "em-006",
+   "subject": "I have a question about a",
+   "body": "Hello,\n\nI have a question about a partnership with your team. \n\nThanks,\nTaylor",
+   "label": "other",
+   "orderId": null,
+   "facts": [
+    "the other request"
+   ]
+  },
+  {
+   "id": "em-007",
+   "subject": "I was charged twice for order",
+   "body": "Hello,\n\nI was charged twice for order ORD-66079 and need a refund. You can call me on +1 (555) 0176-9799. \n\nThanks,\nRiley",
+   "label": "billing",
+   "orderId": "ORD-66079",
+   "facts": [
+    "order ORD-66079",
+    "the billing request"
+   ]
+  },
+  {
+   "id": "em-008",
+   "subject": "I was charged twice for {order};",
+   "body": "Hello,\n\nI was charged twice for ORD-23188; please refund it and cancel my subscription. You can call me on +1 (555) 0159-6190. \n\nThanks,\nDrew",
+   "label": "cancellation",
+   "orderId": "ORD-23188",
+   "facts": [
+    "order ORD-23188",
+    "the cancellation request"
+   ]
+  },
+  {
+   "id": "em-009",
+   "subject": "The app keeps showing an error",
+   "body": "Hello,\n\nThe app keeps showing an error and will crash when I open it. \n\nThanks,\nTaylor",
+   "label": "technical",
+   "orderId": null,
+   "facts": [
+    "the technical request"
+   ]
+  },
+  {
+   "id": "em-010",
+   "subject": "Please change my email on the",
+   "body": "Hello,\n\nPlease change my email on the account to the new one. \n\nThanks,\nAvery",
+   "label": "account",
+   "orderId": null,
+   "facts": [
+    "the account request"
+   ]
+  },
+  {
+   "id": "em-011",
+   "subject": "I want to close my account",
+   "body": "Hello,\n\nI want to close my account and stop my subscription. \n\nThanks,\nRiley",
+   "label": "cancellation",
+   "orderId": null,
+   "facts": [
+    "the cancellation request"
+   ]
+  },
+  {
+   "id": "em-012",
+   "subject": "I have a question about a",
+   "body": "Hello,\n\nI have a question about a partnership with your team. You can call me on +1 (555) 0150-6713. \n\nThanks,\nQuinn",
+   "label": "other",
+   "orderId": null,
+   "facts": [
+    "the other request"
+   ]
+  },
+  {
+   "id": "em-013",
+   "subject": "I was charged twice for order",
+   "body": "Hello,\n\nI was charged twice for order ORD-51955 and need a refund. You can call me on +1 (555) 0176-4774. \n\nThanks,\nSam",
+   "label": "billing",
+   "orderId": "ORD-51955",
+   "facts": [
+    "order ORD-51955",
+    "the billing request"
+   ]
+  },
+  {
+   "id": "em-014",
+   "subject": "Where is my order {order}? The",
+   "body": "Hello,\n\nWhere is my order ORD-59931? The tracking hasn't moved in a week. This is urgent, please help today.\n\nThanks,\nSam",
+   "label": "shipping",
+   "orderId": "ORD-59931",
+   "facts": [
+    "order ORD-59931",
+    "the shipping request"
+   ]
+  },
+  {
+   "id": "em-015",
+   "subject": "The app keeps showing an error",
+   "body": "Hello,\n\nThe app keeps showing an error and will crash when I open it. This is urgent, please help today.\n\nThanks,\nQuinn",
+   "label": "technical",
+   "orderId": null,
+   "facts": [
+    "the technical request"
+   ]
+  },
+  {
+   "id": "em-016",
+   "subject": "Please change my email on the",
+   "body": "Hello,\n\nPlease change my email on the account to the new one. \n\nThanks,\nSam",
+   "label": "account",
+   "orderId": null,
+   "facts": [
+    "the account request"
+   ]
+  },
+  {
+   "id": "em-017",
+   "subject": "I want to close my account",
+   "body": "Hello,\n\nI want to close my account and stop my subscription. \n\nThanks,\nMorgan",
+   "label": "cancellation",
+   "orderId": null,
+   "facts": [
+    "the cancellation request"
+   ]
+  },
+  {
+   "id": "em-018",
+   "subject": "The delivery of {order} was fine",
+   "body": "Hello,\n\nThe delivery of ORD-49137 was fine but I was charged twice, please refund the payment. This is urgent, please help today.\n\nThanks,\nSam",
+   "label": "billing",
+   "orderId": "ORD-49137",
+   "facts": [
+    "order ORD-49137",
+    "the billing request"
+   ]
+  },
+  {
+   "id": "em-019",
+   "subject": "My invoice for {order} shows I",
+   "body": "Hello,\n\nMy invoice for ORD-37143 shows I was overcharged on the payment. You can call me on +1 (555) 0117-7705. \n\nThanks,\nMorgan",
+   "label": "billing",
+   "orderId": "ORD-37143",
+   "facts": [
+    "order ORD-37143",
+    "the billing request"
+   ]
+  },
+  {
+   "id": "em-020",
+   "subject": "The delivery for {order} is late",
+   "body": "Hello,\n\nThe delivery for ORD-19302 is late and the package never arrived. \n\nThanks,\nCasey",
+   "label": "shipping",
+   "orderId": "ORD-19302",
+   "facts": [
+    "order ORD-19302",
+    "the shipping request"
+   ]
+  },
+  {
+   "id": "em-021",
+   "subject": "Login fails every time with an",
+   "body": "Hello,\n\nLogin fails every time with an error since the update. \n\nThanks,\nCasey",
+   "label": "technical",
+   "orderId": null,
+   "facts": [
+    "the technical request"
+   ]
+  },
+  {
+   "id": "em-022",
+   "subject": "Please change my email on the",
+   "body": "Hello,\n\nPlease change my email on the account to the new one. \n\nThanks,\nAvery",
+   "label": "account",
+   "orderId": null,
+   "facts": [
+    "the account request"
+   ]
+  },
+  {
+   "id": "em-023",
+   "subject": "I want to close my account",
+   "body": "Hello,\n\nI want to close my account and stop my subscription. You can call me on +1 (555) 0122-6822. \n\nThanks,\nDrew",
+   "label": "cancellation",
+   "orderId": null,
+   "facts": [
+    "the cancellation request"
+   ]
+  },
+  {
+   "id": "em-024",
+   "subject": "I have a question about a",
+   "body": "Hello,\n\nI have a question about a partnership with your team. You can call me on +1 (555) 0178-6884. This is urgent, please help today.\n\nThanks,\nReese",
+   "label": "other",
+   "orderId": null,
+   "facts": [
+    "the other request"
+   ]
+  },
+  {
+   "id": "em-025",
+   "subject": "I was charged twice for order",
+   "body": "Hello,\n\nI was charged twice for order ORD-69761 and need a refund. \n\nThanks,\nMorgan",
+   "label": "billing",
+   "orderId": "ORD-69761",
+   "facts": [
+    "order ORD-69761",
+    "the billing request"
+   ]
+  },
+  {
+   "id": "em-026",
+   "subject": "The delivery for {order} is late",
+   "body": "Hello,\n\nThe delivery for ORD-38342 is late and the package never arrived. \n\nThanks,\nAvery",
+   "label": "shipping",
+   "orderId": "ORD-38342",
+   "facts": [
+    "order ORD-38342",
+    "the shipping request"
+   ]
+  },
+  {
+   "id": "em-027",
+   "subject": "The app keeps showing an error",
+   "body": "Hello,\n\nThe app keeps showing an error and will crash when I open it. \n\nThanks,\nTaylor",
+   "label": "technical",
+   "orderId": null,
+   "facts": [
+    "the technical request"
+   ]
+  },
+  {
+   "id": "em-028",
+   "subject": "Login fails all the time so",
+   "body": "Hello,\n\nLogin fails all the time so please cancel my plan and close my account. \n\nThanks,\nAvery",
+   "label": "cancellation",
+   "orderId": null,
+   "facts": [
+    "the cancellation request"
+   ]
+  },
+  {
+   "id": "em-029",
+   "subject": "I want to close my account",
+   "body": "Hello,\n\nI want to close my account and stop my subscription. This is urgent, please help today.\n\nThanks,\nDrew",
+   "label": "cancellation",
+   "orderId": null,
+   "facts": [
+    "the cancellation request"
+   ]
+  },
+  {
+   "id": "em-030",
+   "subject": "I have a question about a",
+   "body": "Hello,\n\nI have a question about a partnership with your team. You can call me on +1 (555) 0182-1573. This is urgent, please help today.\n\nThanks,\nMorgan",
+   "label": "other",
+   "orderId": null,
+   "facts": [
+    "the other request"
+   ]
+  },
+  {
+   "id": "em-031",
+   "subject": "My invoice for {order} shows I",
+   "body": "Hello,\n\nMy invoice for ORD-65152 shows I was overcharged on the payment. \n\nThanks,\nDrew",
+   "label": "billing",
+   "orderId": "ORD-65152",
+   "facts": [
+    "order ORD-65152",
+    "the billing request"
+   ]
+  },
+  {
+   "id": "em-032",
+   "subject": "The delivery for {order} is late",
+   "body": "Hello,\n\nThe delivery for ORD-14556 is late and the package never arrived. \n\nThanks,\nJordan",
+   "label": "shipping",
+   "orderId": "ORD-14556",
+   "facts": [
+    "order ORD-14556",
+    "the shipping request"
+   ]
+  },
+  {
+   "id": "em-033",
+   "subject": "The app keeps showing an error",
+   "body": "Hello,\n\nThe app keeps showing an error and will crash when I open it. You can call me on +1 (555) 0115-5163. \n\nThanks,\nCasey",
+   "label": "technical",
+   "orderId": null,
+   "facts": [
+    "the technical request"
+   ]
+  },
+  {
+   "id": "em-034",
+   "subject": "Please change my email on the",
+   "body": "Hello,\n\nPlease change my email on the account to the new one. \n\nThanks,\nDrew",
+   "label": "account",
+   "orderId": null,
+   "facts": [
+    "the account request"
+   ]
+  },
+  {
+   "id": "em-035",
+   "subject": "I want to close my account",
+   "body": "Hello,\n\nI want to close my account and stop my subscription. \n\nThanks,\nSam",
+   "label": "cancellation",
+   "orderId": null,
+   "facts": [
+    "the cancellation request"
+   ]
+  },
+  {
+   "id": "em-036",
+   "subject": "I have a question about a",
+   "body": "Hello,\n\nI have a question about a partnership with your team. \n\nThanks,\nRiley",
+   "label": "other",
+   "orderId": null,
+   "facts": [
+    "the other request"
+   ]
+  },
+  {
+   "id": "em-037",
+   "subject": "My invoice for {order} shows I",
+   "body": "Hello,\n\nMy invoice for ORD-67914 shows I was overcharged on the payment. You can call me on +1 (555) 0124-8398. This is urgent, please help today.\n\nThanks,\nAvery",
+   "label": "billing",
+   "orderId": "ORD-67914",
+   "facts": [
+    "order ORD-67914",
+    "the billing request"
+   ]
+  },
+  {
+   "id": "em-038",
+   "subject": "I was charged twice for {order};",
+   "body": "Hello,\n\nI was charged twice for ORD-83517; please refund it and cancel my subscription. \n\nThanks,\nJordan",
+   "label": "cancellation",
+   "orderId": "ORD-83517",
+   "facts": [
+    "order ORD-83517",
+    "the cancellation request"
+   ]
+  },
+  {
+   "id": "em-039",
+   "subject": "Login fails every time with an",
+   "body": "Hello,\n\nLogin fails every time with an error since the update. You can call me on +1 (555) 0117-7696. \n\nThanks,\nTaylor",
+   "label": "technical",
+   "orderId": null,
+   "facts": [
+    "the technical request"
+   ]
+  },
+  {
+   "id": "em-040",
+   "subject": "Please change my email on the",
+   "body": "Hello,\n\nPlease change my email on the account to the new one. You can call me on +1 (555) 0189-6750. \n\nThanks,\nSam",
+   "label": "account",
+   "orderId": null,
+   "facts": [
+    "the account request"
+   ]
+  },
+  {
+   "id": "em-041",
+   "subject": "I want to close my account",
+   "body": "Hello,\n\nI want to close my account and stop my subscription. \n\nThanks,\nDrew",
+   "label": "cancellation",
+   "orderId": null,
+   "facts": [
+    "the cancellation request"
+   ]
+  },
+  {
+   "id": "em-042",
+   "subject": "Just some feedback: the new design",
+   "body": "Hello,\n\nJust some feedback: the new design is a real compliment to the product. You can call me on +1 (555) 0122-6628. This is urgent, please help today.\n\nThanks,\nRiley",
+   "label": "other",
+   "orderId": null,
+   "facts": [
+    "the other request"
+   ]
+  },
+  {
+   "id": "em-043",
+   "subject": "My invoice for {order} shows I",
+   "body": "Hello,\n\nMy invoice for ORD-96933 shows I was overcharged on the payment. \n\nThanks,\nTaylor",
+   "label": "billing",
+   "orderId": "ORD-96933",
+   "facts": [
+    "order ORD-96933",
+    "the billing request"
+   ]
+  },
+  {
+   "id": "em-044",
+   "subject": "Where is my order {order}? The",
+   "body": "Hello,\n\nWhere is my order ORD-57515? The tracking hasn't moved in a week. You can call me on +1 (555) 0198-2249. \n\nThanks,\nDrew",
+   "label": "shipping",
+   "orderId": "ORD-57515",
+   "facts": [
+    "order ORD-57515",
+    "the shipping request"
+   ]
+  },
+  {
+   "id": "em-045",
+   "subject": "The app keeps showing an error",
+   "body": "Hello,\n\nThe app keeps showing an error and will crash when I open it. \n\nThanks,\nReese",
+   "label": "technical",
+   "orderId": null,
+   "facts": [
+    "the technical request"
+   ]
+  },
+  {
+   "id": "em-046",
+   "subject": "Please change my email on the",
+   "body": "Hello,\n\nPlease change my email on the account to the new one. You can call me on +1 (555) 0126-1852. This is urgent, please help today.\n\nThanks,\nMorgan",
+   "label": "account",
+   "orderId": null,
+   "facts": [
+    "the account request"
+   ]
+  },
+  {
+   "id": "em-047",
+   "subject": "I want to close my account",
+   "body": "Hello,\n\nI want to close my account and stop my subscription. \n\nThanks,\nCasey",
+   "label": "cancellation",
+   "orderId": null,
+   "facts": [
+    "the cancellation request"
+   ]
+  },
+  {
+   "id": "em-048",
+   "subject": "The delivery of {order} was fine",
+   "body": "Hello,\n\nThe delivery of ORD-94083 was fine but I was charged twice, please refund the payment. \n\nThanks,\nAvery",
+   "label": "billing",
+   "orderId": "ORD-94083",
+   "facts": [
+    "order ORD-94083",
+    "the billing request"
+   ]
+  },
+  {
+   "id": "em-049",
+   "subject": "I was charged twice for order",
+   "body": "Hello,\n\nI was charged twice for order ORD-49762 and need a refund. You can call me on +1 (555) 0143-2184. \n\nThanks,\nSam",
+   "label": "billing",
+   "orderId": "ORD-49762",
+   "facts": [
+    "order ORD-49762",
+    "the billing request"
+   ]
+  },
+  {
+   "id": "em-050",
+   "subject": "The delivery for {order} is late",
+   "body": "Hello,\n\nThe delivery for ORD-51483 is late and the package never arrived. You can call me on +1 (555) 0161-5892. \n\nThanks,\nReese",
+   "label": "shipping",
+   "orderId": "ORD-51483",
+   "facts": [
+    "order ORD-51483",
+    "the shipping request"
+   ]
+  },
+  {
+   "id": "em-051",
+   "subject": "Login fails every time with an",
+   "body": "Hello,\n\nLogin fails every time with an error since the update. You can call me on +1 (555) 0152-4662. This is urgent, please help today.\n\nThanks,\nReese",
+   "label": "technical",
+   "orderId": null,
+   "facts": [
+    "the technical request"
+   ]
+  },
+  {
+   "id": "em-052",
+   "subject": "Please change my email on the",
+   "body": "Hello,\n\nPlease change my email on the account to the new one. You can call me on +1 (555) 0118-7671. This is urgent, please help today.\n\nThanks,\nQuinn",
+   "label": "account",
+   "orderId": null,
+   "facts": [
+    "the account request"
+   ]
+  },
+  {
+   "id": "em-053",
+   "subject": "Please cancel my subscription, I no",
+   "body": "Hello,\n\nPlease cancel my subscription, I no longer need it. \n\nThanks,\nMorgan",
+   "label": "cancellation",
+   "orderId": null,
+   "facts": [
+    "the cancellation request"
+   ]
+  },
+  {
+   "id": "em-054",
+   "subject": "Just some feedback: the new design",
+   "body": "Hello,\n\nJust some feedback: the new design is a real compliment to the product. You can call me on +1 (555) 0178-9299. \n\nThanks,\nQuinn",
+   "label": "other",
+   "orderId": null,
+   "facts": [
+    "the other request"
+   ]
+  },
+  {
+   "id": "em-055",
+   "subject": "My invoice for {order} shows I",
+   "body": "Hello,\n\nMy invoice for ORD-17631 shows I was overcharged on the payment. \n\nThanks,\nJordan",
+   "label": "billing",
+   "orderId": "ORD-17631",
+   "facts": [
+    "order ORD-17631",
+    "the billing request"
+   ]
+  },
+  {
+   "id": "em-056",
+   "subject": "Where is my order {order}? The",
+   "body": "Hello,\n\nWhere is my order ORD-92821? The tracking hasn't moved in a week. You can call me on +1 (555) 0190-4449. \n\nThanks,\nReese",
+   "label": "shipping",
+   "orderId": "ORD-92821",
+   "facts": [
+    "order ORD-92821",
+    "the shipping request"
+   ]
+  },
+  {
+   "id": "em-057",
+   "subject": "Login fails every time with an",
+   "body": "Hello,\n\nLogin fails every time with an error since the update. \n\nThanks,\nDrew",
+   "label": "technical",
+   "orderId": null,
+   "facts": [
+    "the technical request"
+   ]
+  },
+  {
+   "id": "em-058",
+   "subject": "Login fails all the time so",
+   "body": "Hello,\n\nLogin fails all the time so please cancel my plan and close my account. You can call me on +1 (555) 0174-7333. This is urgent, please help today.\n\nThanks,\nRiley",
+   "label": "cancellation",
+   "orderId": null,
+   "facts": [
+    "the cancellation request"
+   ]
+  },
+  {
+   "id": "em-059",
+   "subject": "I want to close my account",
+   "body": "Hello,\n\nI want to close my account and stop my subscription. \n\nThanks,\nJordan",
+   "label": "cancellation",
+   "orderId": null,
+   "facts": [
+    "the cancellation request"
+   ]
+  },
+  {
+   "id": "em-060",
+   "subject": "I have a question about a",
+   "body": "Hello,\n\nI have a question about a partnership with your team. This is urgent, please help today.\n\nThanks,\nReese",
+   "label": "other",
+   "orderId": null,
+   "facts": [
+    "the other request"
+   ]
+  },
+  {
+   "id": "em-061",
+   "subject": "My invoice for {order} shows I",
+   "body": "Hello,\n\nMy invoice for ORD-18572 shows I was overcharged on the payment. \n\nThanks,\nQuinn",
+   "label": "billing",
+   "orderId": "ORD-18572",
+   "facts": [
+    "order ORD-18572",
+    "the billing request"
+   ],
+   "nearDuplicateOf": "em-001"
+  },
+  {
+   "id": "em-062",
+   "subject": "I was charged twice for {order};",
+   "body": "Hello,\n\nI was charged twice for ORD-25181; please refund it and cancel my subscription. You can call me on +1 (555) 0159-6190. \n\nThanks,\nDrew",
+   "label": "cancellation",
+   "orderId": "ORD-25181",
+   "facts": [
+    "order ORD-25181",
+    "the cancellation request"
+   ],
+   "nearDuplicateOf": "em-008"
+  },
+  {
+   "id": "em-063",
+   "subject": "My invoice for {order} shows I",
+   "body": "Hello,\n\nMy invoice for ORD-11495 shows I was overcharged on the payment. \n\nThanks,\nTaylor",
+   "label": "billing",
+   "orderId": "ORD-11495",
+   "facts": [
+    "order ORD-11495",
+    "the billing request"
+   ],
+   "nearDuplicateOf": "em-043"
+  },
+  {
+   "id": "em-064",
+   "subject": "The delivery for {order} is late",
+   "body": "Hello,\n\nThe delivery for ORD-94889 is late and the package never arrived. You can call me on +1 (555) 0161-5892. \n\nThanks,\nReese",
+   "label": "shipping",
+   "orderId": "ORD-94889",
+   "facts": [
+    "order ORD-94889",
+    "the shipping request"
+   ],
+   "nearDuplicateOf": "em-050"
+  }
+ ]
+}

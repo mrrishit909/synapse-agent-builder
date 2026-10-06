@@ -1,0 +1,1 @@
+{"name":"@synapse/api","private":true,"type":"module","dependencies":{"@fastify/swagger":"^9.9.1","@fastify/websocket":"^11.3.3","@opentelemetry/exporter-trace-otlp-http":"^0.223.0","@opentelemetry/instrumentation-http":"^0.223.0","@opentelemetry/instrumentation-pg":"^0.75.0","@opentelemetry/sdk-node":"^0.223.0","fastify":"^5.12.5","nodemailer":"^10.0.15","pg":"^8.23.1"}}
